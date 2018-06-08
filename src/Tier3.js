@@ -1,9 +1,27 @@
 import React from 'react'
+import { getReducedColor } from './randomColorGenerator.js'
+// import { updateChildColors, updateColors } from './updateColor.js'
 
 
-const Tier3 = (props) => (
-  // this component does not need to change (but feel free to change however you like!)
-  <div className="tier3" onClick={props.handleChildClick} style={{backgroundColor: props.color, color: props.color}}></div>
-)
+class Tier3 extends React.Component {
+	constructor(props) {
+		super(props);
 
+		this.state = {
+			color: this.props.color,
+		}
+	}
+
+	componentWillReceiveProps(nextProps) {
+      this.setState({
+        color: getReducedColor(nextProps.color)
+      })
+	}
+
+  render() {
+	  return(
+	  	<div className="tier3" onClick={this.props.handleChildClick} style={{backgroundColor: this.state.color, color: this.state.color}}></div>
+	  )}
+
+}
 export default Tier3
